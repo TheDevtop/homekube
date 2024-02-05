@@ -1,3 +1,4 @@
+LABEL org.opencontainers.image.source=https://github.com/TheDevtop/homekube
 FROM alpine:edge
 RUN apk add tmux git go jq minio-client curl
 COPY gotty /usr/bin/gotty
