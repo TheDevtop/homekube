@@ -8,4 +8,4 @@ ENV TERM=xterm
 EXPOSE 8079/tcp
 WORKDIR /root
 VOLUME /root/
-CMD ["/usr/bin/gotty", "-w", "/bin/login", "-f", "root"]
+CMD ["/usr/bin/gotty", "-w", "/bin/ash", "-il"]
