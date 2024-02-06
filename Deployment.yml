@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+  name: homekube
+spec:
+  affinity: {}
+  containers:
+    - image: ghcr.io/thedevtop/homekube:latest
+      imagePullPolicy: Always
+      name: ct-0
+      ports:
+        - containerPort: 8079
+          name: hk-svc-0
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - mountPath: /root/
+          name: hk-pv-0
+  restartPolicy: Always
+  volumes:
+    - name: hk-pv-0
+      persistentVolumeClaim:
+        claimName: hk-pvc-0
+---
+apiVersion: v1
+kind: Service
+  name: homekube
+  ownerReferences:
+    - apiVersion: v1
+      controller: true
+      kind: Pod
+      name: homekube
+spec:
+  ports:
+    - name: hk-svc-0
+      port: 8079
+      protocol: TCP
+      targetPort: 8079
+  type: ClusterIP
